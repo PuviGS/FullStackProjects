@@ -1,0 +1,232 @@
+/* General styling */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, black 0%, #1c1c1c 50%, #3d3939 100%);
+  overflow: hidden;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden; /* Prevent the container from expanding beyond viewport */
+}
+
+/* Header */
+.chat-header {
+  background-color: rgba(7, 94, 84, 0.9);
+  color: #ffffff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0; /* Ensures the header remains at the top */
+  z-index: 10; /* Ensure it stays above the messages */
+}
+
+/* Ensure messages do not appear behind the header */
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto; /* Allows scrolling of messages */
+  background-color: rgba(255, 255, 255, 0.8);
+  height: calc(100vh - 150px); /* Adjust height based on header and input */
+  margin-top: 0;
+  position: relative; /* Positioning context for pseudo-element */
+  z-index: 1; /* Ensure it stays below the header */
+}
+
+/* Overlay to hide messages behind the header */
+.chat-messages::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Same height as the header */
+  background: rgba(255, 255, 255, 0.8); /* Match background color */
+  z-index: 2; /* Ensure it covers the top of the messages */
+}
+
+/* Messages */
+.message {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message strong {
+  color: #075e54;
+}
+
+/* Input Area */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: sticky;
+  bottom: 0;
+  z-index: 10; /* Ensure it stays above the messages */
+  border-top: 1px solid #ddd;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.chat-input input:focus {
+  border-color: #075e54;
+}
+
+.chat-input button {
+  background-color: #075e54;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-input button:hover {
+  background-color: #064c40;
+}
+
+.chat-input button:focus {
+  outline: none;
+}
+
+/* Scroll to bottom button */
+.scroll-to-bottom {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background-color: #075e54;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+}
+
+.scroll-to-bottom.show {
+  display: block;
+}
+
+.scroll-to-bottom:hover {
+  background-color: #064c40;
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 130px; /* Adjusted to be above the scroll-to-bottom button */
+  right: 20px;
+  background-color: #075e54;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+}
+
+.scroll-to-top.show {
+  display: block;
+}
+
+.scroll-to-top:hover {
+  background-color: #064c40;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  color: #075e54;
+}
+
+.login-form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.login-form button {
+  background-color: #075e54;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #064c40;
+}
+
+/* Emoji Picker */
+.emoji-picker-react {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+  }
+
+  .chat-input input {
+    font-size: 14px;
+  }
+
+  .chat-input button {
+    padding: 8px 12px;
+  }
+
+  .chat-header h3 {
+    font-size: 1.2em;
+  }
+}
